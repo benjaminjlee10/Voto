@@ -1,17 +1,17 @@
 //
-//  UploadView.swift
-//  Voto
+//  DetailView.swift
+//  ListOfStudents
 //
-//  Created by Benjamin Lee on 4/26/23.
+//  Created by Benjamin Lee on 3/27/23.
 //
 
 import SwiftUI
 import PhotosUI
 
-struct UploadView: View {
+struct DetailView: View {
     @EnvironmentObject var pictureVM: PictureViewModel
-    @State var upload: Picture
-    @State private var selectedImage: Image = Image(systemName: "rectangle.dashed")
+    @State var pictureName: Picture
+    @State private var selectedImage: Image = Image(systemName: "photo")
     @State private var selectedPhoto: PhotosPickerItem?
     @Environment(\.dismiss) private var dismiss
     @State private var imageURL: URL? // will hold URL of FirebaseStorage image
@@ -20,13 +20,13 @@ struct UploadView: View {
         VStack (alignment: .leading) {
             Text("Location:")
                 .bold()
-            TextField("location", text: $upload.location)
+            TextField("location", text: $pictureName.location)
                 .textFieldStyle(.roundedBorder)
                 .padding(.bottom)
             
             Text("Description:")
                 .bold()
-            TextField("description", text: $upload.description)
+            TextField("description", text: $pictureName.description)
                 .textFieldStyle(.roundedBorder)
                 .padding(.bottom)
             
@@ -77,13 +77,12 @@ struct UploadView: View {
             Spacer()
         }
         .task {
-            if let id = upload.id { // add to VStack - acts like .onAppear
+            if let id = pictureName.id { // add to VStack - acts like .onAppear
                 if let url = await pictureVM.getImageURL(id: id) { // if this isn't a new place id
                     imageURL = url
                 }
             }
         }
-        
         .font(.title2)
         .padding()
         .navigationBarBackButtonHidden()
@@ -96,16 +95,16 @@ struct UploadView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Upload") {
+                Button("Save") {
                     Task {
-                        let id = await pictureVM.savePicture(picture: upload)
+                        let id = await pictureVM.savePicture(picture: pictureName)
                         if id != nil { // save works
-                            upload.id = id
-                            await pictureVM.saveImage(id: upload.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
+                            pictureName.id = id
+                            await pictureVM.saveImage(id: pictureName.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
                             dismiss()
                         }
                         else { // did not save
-                            print("😡 ERROR uploading")
+                            print("😡 ERROR saving")
                         }
                     }
                 }
@@ -114,10 +113,10 @@ struct UploadView: View {
     }
 }
 
-struct UploadView_Previews: PreviewProvider {
+struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            UploadView(upload: Picture(location: "BC", description: "test description here"))
+            DetailView(pictureName: Picture(location: "test location", description: "just a test description"))
                 .environmentObject(PictureViewModel())
         }
     }

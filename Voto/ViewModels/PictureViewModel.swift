@@ -36,22 +36,22 @@ class PictureViewModel: ObservableObject {
         }
     }
     
-    func deleteData(picture: Picture) async {
-        let db = Firestore.firestore()
-        
-        guard let id = picture.id else {
-            print("😡 ERROR: id was nil. This should not have happened")
-            return
-        }
-        
-        do {
-            try await db.collection("pictures").document(id).delete()
-            print("🗑️Document successfully removed")
-        } catch {
-            print("😡 ERROR:removing document \(error.localizedDescription)")
-            return
-        }
-    }
+//    func deleteData(picture: Picture) async {
+//        let db = Firestore.firestore()
+//
+//        guard let id = picture.id else {
+//            print("😡 ERROR: id was nil. This should not have happened")
+//            return
+//        }
+//
+//        do {
+//            try await db.collection("pictures").document(id).delete()
+//            print("🗑️Document successfully removed")
+//        } catch {
+//            print("😡 ERROR:removing document \(error.localizedDescription)")
+//            return
+//        }
+//    }
     
     func saveImage(id: String, image: UIImage) async {
         let storage = Storage.storage()

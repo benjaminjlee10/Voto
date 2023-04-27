@@ -26,12 +26,6 @@ struct MainView: View {
                         Text(picture.location)
                     }
                 }
-                .onDelete { indexSet in
-                    guard let index = indexSet.first else {return}
-                    Task {
-                        await pictureVM.deleteData(picture: pictures[index])
-                    }
-                }
             }
             .listStyle(.plain)
             .font(.title2)
@@ -59,7 +53,8 @@ struct MainView: View {
         }
         .sheet(isPresented: $sheetIsPresented) {
             NavigationStack {
-                UploadView(upload: Picture())
+                DetailView(pictureName: Picture())
+                    .environmentObject(PictureViewModel())
             }
         }
     }
