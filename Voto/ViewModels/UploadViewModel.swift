@@ -10,10 +10,10 @@ import FirebaseFirestore
 import FirebaseStorage
 import UIKit
 
-class PictureViewModel: ObservableObject {
-    @Published var picture = Picture()
+class UploadViewModel: ObservableObject {
+    @Published var picture = Upload()
     
-    func savePicture(picture: Picture) async -> String? {
+    func savePicture(picture: Upload) async -> String? {
         let db = Firestore.firestore()
         if let id = picture.id { // picture must already exist, so save
             do {
@@ -36,22 +36,22 @@ class PictureViewModel: ObservableObject {
         }
     }
     
-//    func deleteData(picture: Picture) async {
-//        let db = Firestore.firestore()
-//
-//        guard let id = picture.id else {
-//            print("😡 ERROR: id was nil. This should not have happened")
-//            return
-//        }
-//
-//        do {
-//            try await db.collection("pictures").document(id).delete()
-//            print("🗑️Document successfully removed")
-//        } catch {
-//            print("😡 ERROR:removing document \(error.localizedDescription)")
-//            return
-//        }
-//    }
+    func deleteData(picture: Upload) async {
+        let db = Firestore.firestore()
+
+        guard let id = picture.id else {
+            print("😡 ERROR: id was nil. This should not have happened")
+            return
+        }
+
+        do {
+            try await db.collection("pictures").document(id).delete()
+            print("🗑️Document successfully removed")
+        } catch {
+            print("😡 ERROR:removing document \(error.localizedDescription)")
+            return
+        }
+    }
     
     func saveImage(id: String, image: UIImage) async {
         let storage = Storage.storage()

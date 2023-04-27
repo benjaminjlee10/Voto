@@ -1,5 +1,5 @@
 //
-//  DetailView.swift
+//  UploadView.swift
 //  ListOfStudents
 //
 //  Created by Benjamin Lee on 3/27/23.
@@ -8,25 +8,26 @@
 import SwiftUI
 import PhotosUI
 
-struct DetailView: View {
-    @EnvironmentObject var pictureVM: PictureViewModel
-    @State var pictureName: Picture
-    @State private var selectedImage: Image = Image(systemName: "photo")
+struct UploadView: View {
+    @EnvironmentObject var pictureVM: UploadViewModel
+    @State var upload: Upload
+    @State private var selectedImage: Image = Image(systemName: "rectangle.dashed")
     @State private var selectedPhoto: PhotosPickerItem?
     @Environment(\.dismiss) private var dismiss
     @State private var imageURL: URL? // will hold URL of FirebaseStorage image
+    var previewRunning = false
     
     var body: some View {
         VStack (alignment: .leading) {
             Text("Location:")
                 .bold()
-            TextField("location", text: $pictureName.location)
+            TextField("location", text: $upload.location)
                 .textFieldStyle(.roundedBorder)
                 .padding(.bottom)
             
             Text("Description:")
                 .bold()
-            TextField("description", text: $pictureName.description)
+            TextField("description", text: $upload.description)
                 .textFieldStyle(.roundedBorder)
                 .padding(.bottom)
             
@@ -61,7 +62,7 @@ struct DetailView: View {
                         .resizable()
                         .scaledToFit()
                 } placeholder: {
-                    Image(systemName: "rectangle.dashed")
+                    Image(systemName: "capsule")
                         .resizable()
                         .scaledToFit()
                 }
@@ -77,7 +78,7 @@ struct DetailView: View {
             Spacer()
         }
         .task {
-            if let id = pictureName.id { // add to VStack - acts like .onAppear
+            if let id = upload.id { // add to VStack - acts like .onAppear
                 if let url = await pictureVM.getImageURL(id: id) { // if this isn't a new place id
                     imageURL = url
                 }
@@ -89,7 +90,7 @@ struct DetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button("Back") {
                     dismiss()
                 }
             }
@@ -97,10 +98,10 @@ struct DetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
                     Task {
-                        let id = await pictureVM.savePicture(picture: pictureName)
+                        let id = await pictureVM.savePicture(picture: upload)
                         if id != nil { // save works
-                            pictureName.id = id
-                            await pictureVM.saveImage(id: pictureName.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
+                            upload.id = id
+                            await pictureVM.saveImage(id: upload.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
                             dismiss()
                         }
                         else { // did not save
@@ -113,11 +114,11 @@ struct DetailView: View {
     }
 }
 
-struct DetailView_Previews: PreviewProvider {
+struct UploadView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            DetailView(pictureName: Picture(location: "test location", description: "just a test description"))
-                .environmentObject(PictureViewModel())
+            UploadView(upload: Upload(location: "test location", description: "just a test description"))
+                .environmentObject(UploadViewModel())
         }
     }
 }

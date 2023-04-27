@@ -10,8 +10,8 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct MainView: View {
-    @EnvironmentObject var pictureVM: PictureViewModel
-    @FirestoreQuery(collectionPath: "pictures") var pictures: [Picture]
+    @EnvironmentObject var pictureVM: UploadViewModel
+    @FirestoreQuery(collectionPath: "pictures") var pictures: [Upload]
     @State private var sheetIsPresented = false
     @Environment(\.dismiss) private var dismiss
     
@@ -20,16 +20,16 @@ struct MainView: View {
             List {
                 ForEach(pictures) { picture in
                     NavigationLink {
-                        Text("filler")
+//                        UploadView(pictureName: picture)
+                        VoteView(upload: picture, vote: Vote())
                     } label: {
                         Text(picture.description)
-                        Text(picture.location)
                     }
                 }
             }
             .listStyle(.plain)
-            .font(.title2)
-            .navigationTitle("Pictures Home")
+            .navigationTitle("Pictures of the Day")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Sign Out") {
@@ -53,8 +53,7 @@ struct MainView: View {
         }
         .sheet(isPresented: $sheetIsPresented) {
             NavigationStack {
-                DetailView(pictureName: Picture())
-                    .environmentObject(PictureViewModel())
+                UploadView(upload: Upload())
             }
         }
     }
@@ -63,6 +62,6 @@ struct MainView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(PictureViewModel())
+            .environmentObject(UploadViewModel())
     }
 }

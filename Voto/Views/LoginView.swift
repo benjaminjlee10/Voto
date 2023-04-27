@@ -91,7 +91,7 @@ struct LoginView: View {
             }
         }
         .fullScreenCover(isPresented: $presentSheet) {
-            MainView()
+            BarView()
         }
     }
     
