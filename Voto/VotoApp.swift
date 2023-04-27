@@ -20,11 +20,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct VotoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var pictureVM = UploadViewModel()
+    @StateObject var userVM = UserViewModel()
     
     var body: some Scene {
         WindowGroup {
             LoginView()
                 .environmentObject(pictureVM)
+                .environmentObject(userVM)
         }
     }
 }

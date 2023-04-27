@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BarView: View {    
+struct BarView: View {
     var body: some View {
         TabView {
             MainView()
@@ -20,7 +20,7 @@ struct BarView: View {
                     Image(systemName: "person.2")
                     Text("Friends")
                 }
-            ProfileView(user: User())
+            ProfileView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Profile")

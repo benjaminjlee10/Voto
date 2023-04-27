@@ -12,4 +12,8 @@ struct User: Codable, Identifiable {
     @DocumentID var id: String?
     var name = ""
     var email = ""
+    
+    var dictionary: [String: Any] {
+        return ["name": name, "email": email]
+    }
 }

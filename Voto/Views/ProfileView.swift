@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ProfileView: View {
-    let user: User
+    @EnvironmentObject var userVM: UserViewModel
+    @State private var name = ""
     
     var body: some View {
         VStack {
@@ -17,26 +19,44 @@ struct ProfileView: View {
                 .frame(width: 100, height: 100)
                 .padding()
             
-            Text(user.name)
-                .font(.title)
-            
-            Divider()
+            TextField("Name", text: $name)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
             
             HStack {
                 Text("Email:")
+                Text(Auth.auth().currentUser?.email ?? "")
+                    .foregroundColor(.gray)
                 Spacer()
-                Text(user.email)
             }
             .padding()
             
             Spacer()
+            
+            Button {
+                userVM.user.name = name
+                userVM.saveUser(user: userVM.user)
+            } label: {
+                Text("Save")
+                    .fontWeight(.semibold)
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(40)
+            }
+            .padding()
+        }
+        .onAppear {
+            userVM.loadUser()
+            name = userVM.user.name
         }
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(user: User(name: "test name", email: "testemail@bc.edu"))
+        ProfileView()
+            .environmentObject(UserViewModel())
     }
 }
 

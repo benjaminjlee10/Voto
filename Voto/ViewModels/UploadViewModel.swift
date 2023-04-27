@@ -15,7 +15,7 @@ class UploadViewModel: ObservableObject {
     
     func savePicture(picture: Upload) async -> String? {
         let db = Firestore.firestore()
-        if let id = picture.id { // picture must already exist, so save
+        if let id = picture.id { // upload must already exist, so save
             do {
                 try await db.collection("pictures").document(id).setData(picture.dictionary)
                 print("😎 Data updated successfully!")
@@ -24,7 +24,7 @@ class UploadViewModel: ObservableObject {
                 print("😡 ERROR: Could not update data in 'pictures' \(error.localizedDescription)")
                 return nil
             }
-        } else { // no id? Then this must be a new student to add
+        } else { // no id? Then this must be a new upload to add
             do {
                 let docRef = try await db.collection("pictures").addDocument(data: picture.dictionary)
                 print("🐣 Data added successfully!")
