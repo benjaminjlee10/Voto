@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct UpvoteView: View {
+    @Binding var upvote: Int
     @StateObject var upvoteVM = UpvoteViewModel()
     
     var body: some View {
         VStack {
             Text("Upvotes: \(upvoteVM.upvotes)")
-            Button(action: upvoteVM.didToggleUpvote) {
+            Button {
+                upvoteVM.didToggleUpvote()
+                upvote = 1
+            } label: {
                 Image(systemName: "hand.thumbsup")
             }
             .foregroundColor(upvoteVM.didUpvote ? .blue : .gray)
@@ -25,6 +29,6 @@ struct UpvoteView: View {
 
 struct UpvoteView_Previews: PreviewProvider {
     static var previews: some View {
-        UpvoteView()
+        UpvoteView(upvote: .constant(1))
     }
 }

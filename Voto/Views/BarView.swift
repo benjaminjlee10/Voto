@@ -15,11 +15,7 @@ struct BarView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }
-            FriendsListView()
-                .tabItem {
-                    Image(systemName: "person.2")
-                    Text("Friends")
-                }
+            
             ProfileView(user: User())
                 .tabItem {
                     Image(systemName: "person.crop.circle")

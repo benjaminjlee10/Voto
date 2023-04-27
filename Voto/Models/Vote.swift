@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 struct Vote: Identifiable, Codable {
     @DocumentID var id: String?
-    var vote = ""
+    var vote = 0
     var comment = ""
     var commenter = ""
     var postedOn = Date()

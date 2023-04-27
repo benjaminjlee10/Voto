@@ -11,26 +11,26 @@ import FirebaseStorage
 import UIKit
 
 class UploadViewModel: ObservableObject {
-    @Published var picture = Upload()
+    @Published var upload = Upload()
     
-    func savePicture(picture: Upload) async -> String? {
+    func savePicture(upload: Upload) async -> String? {
         let db = Firestore.firestore()
-        if let id = picture.id { // upload must already exist, so save
+        if let id = upload.id { // upload must already exist, so save
             do {
-                try await db.collection("pictures").document(id).setData(picture.dictionary)
+                try await db.collection("uploads").document(id).setData(upload.dictionary)
                 print("😎 Data updated successfully!")
-                return picture.id
+                return upload.id
             } catch {
-                print("😡 ERROR: Could not update data in 'pictures' \(error.localizedDescription)")
+                print("😡 ERROR: Could not update data in 'uploads' \(error.localizedDescription)")
                 return nil
             }
         } else { // no id? Then this must be a new upload to add
             do {
-                let docRef = try await db.collection("pictures").addDocument(data: picture.dictionary)
+                let docRef = try await db.collection("uploads").addDocument(data: upload.dictionary)
                 print("🐣 Data added successfully!")
                 return docRef.documentID
             } catch {
-                print("😡 ERROR: Could not create a new picture in 'pictures' \(error.localizedDescription)")
+                print("😡 ERROR: Could not create a new upload in 'uploads' \(error.localizedDescription)")
                 return nil
             }
         }

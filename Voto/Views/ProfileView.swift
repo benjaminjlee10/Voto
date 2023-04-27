@@ -11,15 +11,37 @@ import FirebaseAuth
 struct ProfileView: View {
     @EnvironmentObject var userVM: UserViewModel
     @State var user: User
-    
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                
+                Button {
+                    do {
+                        try Auth.auth().signOut()
+                        print("🪵➡️ Log out successful")
+                        dismiss()
+                    } catch {
+                        print("😡 ERROR: Could not sign out")
+                    }
+                } label: {
+                    Text("Sign Out")
+                        .foregroundColor(.red)
+                        .font(.title2)
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .foregroundColor(.red)
+                        .font(.title)
+                }
+                .padding()
+            }
             Image(systemName: "person.circle")
                 .resizable()
                 .frame(width: 100, height: 100)
                 .padding()
             
-            TextField("Name", text: $userVM.user.name)
+            TextField("Name", text: $user.name)
                 .textFieldStyle(.roundedBorder)
                 .autocorrectionDisabled()
                 .submitLabel(.done)
@@ -35,15 +57,22 @@ struct ProfileView: View {
             
             Spacer()
             
+            
             Button {
                 Task {
-                    user.name = userVM.user.name
-                    let id = await userVM.saveUser(user: user)
-                    if id != nil {
-                        print("Updated current user's name to \(user)")
-                    }
-                    else {
-                        print("ERROR saving user name")
+                    let currentUser = Auth.auth().currentUser
+                    if currentUser != nil {
+                        userVM.user.name = user.name
+                        
+                        let id = await userVM.saveUser(user: userVM.user)
+                        if id != nil {
+                            print("Updated current user's name to \(user)")
+                        }
+                        else {
+                            print("ERROR saving user name")
+                        }
+                    } else {
+                        print("No user logged in")
                     }
                 }
             } label: {
@@ -58,6 +87,7 @@ struct ProfileView: View {
         }
         .onAppear {
             userVM.loadUser()
+            user = userVM.user
         }
     }
 }

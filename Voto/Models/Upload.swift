@@ -12,8 +12,9 @@ struct Upload: Codable, Identifiable {
     @DocumentID var id: String?
     var location = ""
     var description = ""
+    var imageID = ""
     
     var dictionary: [String: Any] {
-        return ["location": location, "description": description]
+        return ["location": location, "description": description, "imageURL": imageID]
     }
 }

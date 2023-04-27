@@ -32,7 +32,7 @@ struct VoteView: View {
                 .font(.title2)
                 .bold()
             HStack {
-                UpvoteView()
+                UpvoteView(upvote: $vote.vote)
             }
             
             Spacer()

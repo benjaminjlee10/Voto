@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 import PhotosUI
 
 struct UploadView: View {
@@ -19,18 +20,6 @@ struct UploadView: View {
     
     var body: some View {
         VStack (alignment: .leading) {
-            Text("Location:")
-                .bold()
-            TextField("location", text: $upload.location)
-                .textFieldStyle(.roundedBorder)
-                .padding(.bottom)
-            
-            Text("Description:")
-                .bold()
-            TextField("description", text: $upload.description)
-                .textFieldStyle(.roundedBorder)
-                .padding(.bottom)
-            
             HStack {
                 Text("Upload Image:")
                     .bold()
@@ -55,7 +44,6 @@ struct UploadView: View {
                     }
                 }
             }
-            
             if imageURL != nil {
                 AsyncImage(url: imageURL) { image in
                     image
@@ -74,6 +62,19 @@ struct UploadView: View {
                     .scaledToFit()
                     .frame(maxWidth: .infinity)
             }
+            Spacer()
+            
+            Text("Location:")
+                .bold()
+            TextField("location", text: $upload.location)
+                .textFieldStyle(.roundedBorder)
+                .padding(.bottom)
+            
+            Text("Description:")
+                .bold()
+            TextField("description", text: $upload.description)
+                .textFieldStyle(.roundedBorder)
+                .padding(.bottom)
             
             Spacer()
         }
@@ -96,9 +97,9 @@ struct UploadView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
+                Button("Upload") {
                     Task {
-                        let id = await pictureVM.savePicture(picture: upload)
+                        let id = await pictureVM.savePicture(upload: upload)
                         if id != nil { // save works
                             upload.id = id
                             await pictureVM.saveImage(id: upload.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())

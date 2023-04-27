@@ -13,9 +13,6 @@
 		D820667229FA12A6006B01D2 /* UpvoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820667129FA12A6006B01D2 /* UpvoteView.swift */; };
 		D820667429FA15CC006B01D2 /* UpvoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820667329FA15CC006B01D2 /* UpvoteViewModel.swift */; };
 		D820667829FA422C006B01D2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820667729FA422C006B01D2 /* User.swift */; };
-		D820667A29FA4253006B01D2 /* FriendsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820667929FA4253006B01D2 /* FriendsListViewModel.swift */; };
-		D820667C29FA4293006B01D2 /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820667B29FA4293006B01D2 /* FriendsListView.swift */; };
-		D820667E29FA430D006B01D2 /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820667D29FA430D006B01D2 /* AddFriendView.swift */; };
 		D820668429FA4819006B01D2 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820668329FA4819006B01D2 /* BarView.swift */; };
 		D820668629FA491F006B01D2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820668529FA491F006B01D2 /* ProfileView.swift */; };
 		D820668829FA4CC4006B01D2 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820668729FA4CC4006B01D2 /* UserViewModel.swift */; };
@@ -40,9 +37,6 @@
 		D820667129FA12A6006B01D2 /* UpvoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpvoteView.swift; sourceTree = "<group>"; };
 		D820667329FA15CC006B01D2 /* UpvoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpvoteViewModel.swift; sourceTree = "<group>"; };
 		D820667729FA422C006B01D2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D820667929FA4253006B01D2 /* FriendsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListViewModel.swift; sourceTree = "<group>"; };
-		D820667B29FA4293006B01D2 /* FriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
-		D820667D29FA430D006B01D2 /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
 		D820668329FA4819006B01D2 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		D820668529FA491F006B01D2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D820668729FA4CC4006B01D2 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -125,7 +119,6 @@
 			children = (
 				D8DE555329F9D09000BA5E71 /* UploadViewModel.swift */,
 				D820667329FA15CC006B01D2 /* UpvoteViewModel.swift */,
-				D820667929FA4253006B01D2 /* FriendsListViewModel.swift */,
 				D820668729FA4CC4006B01D2 /* UserViewModel.swift */,
 			);
 			path = ViewModels;
@@ -140,8 +133,6 @@
 				D820666B29F9FD35006B01D2 /* UploadView.swift */,
 				D820666F29FA0F6B006B01D2 /* VoteView.swift */,
 				D820667129FA12A6006B01D2 /* UpvoteView.swift */,
-				D820667B29FA4293006B01D2 /* FriendsListView.swift */,
-				D820667D29FA430D006B01D2 /* AddFriendView.swift */,
 				D820668529FA491F006B01D2 /* ProfileView.swift */,
 			);
 			path = Views;
@@ -229,11 +220,8 @@
 			files = (
 				D8DE555229F9CFD000BA5E71 /* Upload.swift in Sources */,
 				D820666C29F9FD35006B01D2 /* UploadView.swift in Sources */,
-				D820667C29FA4293006B01D2 /* FriendsListView.swift in Sources */,
 				D820667029FA0F6B006B01D2 /* VoteView.swift in Sources */,
-				D820667E29FA430D006B01D2 /* AddFriendView.swift in Sources */,
 				D8DE555429F9D09000BA5E71 /* UploadViewModel.swift in Sources */,
-				D820667A29FA4253006B01D2 /* FriendsListViewModel.swift in Sources */,
 				D820667429FA15CC006B01D2 /* UpvoteViewModel.swift in Sources */,
 				D820668629FA491F006B01D2 /* ProfileView.swift in Sources */,
 				D820666E29FA0ED5006B01D2 /* Vote.swift in Sources */,

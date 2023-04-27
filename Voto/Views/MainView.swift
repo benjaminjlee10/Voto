@@ -20,10 +20,11 @@ struct MainView: View {
             List {
                 ForEach(pictures) { picture in
                     NavigationLink {
-//                        UploadView(pictureName: picture)
                         VoteView(upload: picture, vote: Vote())
                     } label: {
-                        Text(picture.description)
+                        HStack {
+                            Text("test")
+                        }
                     }
                 }
             }
@@ -31,17 +32,6 @@ struct MainView: View {
             .navigationTitle("Pictures of the Day")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Sign Out") {
-                        do {
-                            try Auth.auth().signOut()
-                            print("🪵➡️ Log out successful")
-                            dismiss()
-                        } catch {
-                            print("😡 ERROR: Could not sign out")
-                        }
-                    }
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         sheetIsPresented.toggle()
