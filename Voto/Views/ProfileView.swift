@@ -10,7 +10,7 @@ import FirebaseAuth
 
 struct ProfileView: View {
     @EnvironmentObject var userVM: UserViewModel
-    @State private var name = ""
+    @State var user: User
     
     var body: some View {
         VStack {
@@ -19,8 +19,10 @@ struct ProfileView: View {
                 .frame(width: 100, height: 100)
                 .padding()
             
-            TextField("Name", text: $name)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("Name", text: $userVM.user.name)
+                .textFieldStyle(.roundedBorder)
+                .autocorrectionDisabled()
+                .submitLabel(.done)
                 .padding()
             
             HStack {
@@ -34,8 +36,16 @@ struct ProfileView: View {
             Spacer()
             
             Button {
-                userVM.user.name = name
-                userVM.saveUser(user: userVM.user)
+                Task {
+                    user.name = userVM.user.name
+                    let id = await userVM.saveUser(user: user)
+                    if id != nil {
+                        print("Updated current user's name to \(user)")
+                    }
+                    else {
+                        print("ERROR saving user name")
+                    }
+                }
             } label: {
                 Text("Save")
                     .fontWeight(.semibold)
@@ -48,14 +58,13 @@ struct ProfileView: View {
         }
         .onAppear {
             userVM.loadUser()
-            name = userVM.user.name
         }
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(user: User())
             .environmentObject(UserViewModel())
     }
 }

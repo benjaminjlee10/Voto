@@ -12,10 +12,11 @@ import FirebaseStorage
 
 class UserViewModel: ObservableObject {
     @Published var user = User()
-    private let db = Firestore.firestore()
     private var userId: String?
     
     func loadUser() {
+        let db = Firestore.firestore()
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         db.collection("users").document(uid).getDocument { document, error in
             if let error = error {
@@ -23,21 +24,25 @@ class UserViewModel: ObservableObject {
             } else {
                 if let document = document, document.exists {
                     let data = document.data()!
-                    self.user = User(name: data["name"] as! String, email: data["email"] as! String)
+                    let name = data["name"] as! String
+                    self.user = User(name: name)
                 }
             }
         }
     }
     
-    func saveUser(user: User) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        db.collection("users").document(uid).setData([
-            "name": user.name,
-            "email": user.email
-        ], merge: true) { error in
-            if let error = error {
-                print("Error saving user document: \(error)")
-            }
+    func saveUser(user: User) async -> String? {
+        let db = Firestore.firestore()
+        let userID = user.id ?? Auth.auth().currentUser?.uid ?? ""
+        do {
+            var userData = user.dictionary
+            userData["name"] = user.name
+            let _ = try await db.collection("users").document(userID).setData(user.dictionary)
+            print("😎 Data added successfully!")
+            return userID
+        } catch {
+            print("😡 ERROR: could not save new user in 'users' \(error.localizedDescription)")
+            return nil
         }
     }
 }

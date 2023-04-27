@@ -20,7 +20,7 @@ struct BarView: View {
                     Image(systemName: "person.2")
                     Text("Friends")
                 }
-            ProfileView()
+            ProfileView(user: User())
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Profile")
