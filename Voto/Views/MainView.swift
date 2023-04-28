@@ -15,8 +15,9 @@ struct MainView: View {
     @State private var sheetIsPresented = false
     @Environment(\.dismiss) private var dismiss
     @State private var currentTime = Date()
-    @State private var todayAdj = ""
+    @State var user: User
     
+    @AppStorage("adjective") private var todayAdj = ""
     @AppStorage("lastAdjectiveUpdate") private var lastAdjectiveUpdate = Date.distantPast.timeIntervalSince1970
     
     private var randomAdjective: String {
@@ -37,10 +38,6 @@ struct MainView: View {
         else {
             return false
         }
-    }
-    
-    init() {
-        todayAdj = randomAdjective
     }
     
     var body: some View {
@@ -94,6 +91,9 @@ struct MainView: View {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 updateTime()
             }
+            if shouldUpdateAdjective || todayAdj == "" {
+                todayAdj = randomAdjective
+            }
         }
         .sheet(isPresented: $sheetIsPresented) {
             NavigationStack {
@@ -127,7 +127,7 @@ struct MainView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(user: User())
             .environmentObject(UploadViewModel())
     }
 }
