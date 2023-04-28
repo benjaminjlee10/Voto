@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct UpvoteView: View {
-    @Binding var upvote: Int
+    @State var upload: Upload
     @StateObject var upvoteVM = UpvoteViewModel()
     
     var body: some View {
         VStack {
-            Text("Upvotes: \(upvoteVM.upvotes)")
+//            Text("Upvotes: \(upvoteVM.upvotes)")
             Button {
                 upvoteVM.didToggleUpvote()
-                upvote = 1
+                upload.upvotes += 1
             } label: {
                 Image(systemName: "hand.thumbsup")
             }
@@ -29,6 +29,6 @@ struct UpvoteView: View {
 
 struct UpvoteView_Previews: PreviewProvider {
     static var previews: some View {
-        UpvoteView(upvote: .constant(1))
+        UpvoteView(upload: Upload(name: "sample name", description: "sample description", poster: "sample poster"))
     }
 }

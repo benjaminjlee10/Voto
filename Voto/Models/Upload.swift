@@ -13,7 +13,7 @@ struct Upload: Codable, Identifiable {
     var name = ""
     var description = ""
     var poster = ""
-    var upvotes = ""
+    var upvotes = 0
     var imageID = ""
     
     var dictionary: [String: Any] {

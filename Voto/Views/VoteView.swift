@@ -9,6 +9,7 @@ import SwiftUI
 
 struct VoteView: View {
     @EnvironmentObject var uploadVM: UploadViewModel
+    @EnvironmentObject var upvoteVM: UpvoteViewModel
     @State var upload: Upload
     @State var vote: Vote
     @Environment(\.dismiss) private var dismiss
@@ -65,8 +66,15 @@ struct VoteView: View {
             Text("Click to Vote:")
                 .font(.title2)
                 .bold()
-            HStack {
-                UpvoteView(upvote: $vote.vote)
+            
+            Text("Upvotes: \(upload.upvotes)")
+            
+            Button {
+                upvoteVM.didToggleUpvote()
+                upload.upvotes = upvoteVM.upvotes
+                uploadVM.updateUpload(upload: upload)
+            } label: {
+                Text("Upvote")
             }
             
             Spacer()
@@ -94,6 +102,7 @@ struct VoteView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             VoteView(upload: Upload(name: "Sample Name", description: "sample description", poster: "sample@bc.edu"), vote: Vote(), dailyAdjective: "test daily adjective")
+                .environmentObject(UploadViewModel())
         }
     }
 }

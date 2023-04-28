@@ -83,4 +83,15 @@ class UploadViewModel: ObservableObject {
             return nil
         }
     }
+    
+    func updateUpload(upload: Upload) {
+        let db = Firestore.firestore()
+        
+        do {
+            try db.collection("uploads").document(upload.id!).setData(from: upload)
+            print("Upload has been updated!")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
