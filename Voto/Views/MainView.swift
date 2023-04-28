@@ -15,15 +15,57 @@ struct MainView: View {
     @State private var sheetIsPresented = false
     @Environment(\.dismiss) private var dismiss
     @State private var currentTime = Date()
+    @State private var todayAdj = ""
+    
+    @AppStorage("lastAdjectiveUpdate") private var lastAdjectiveUpdate = Date.distantPast.timeIntervalSince1970
+    
+    private var randomAdjective: String {
+        let adjectives = ["amazing", "fantastic", "wonderful", "marvelous", "terrific"]
+        return adjectives.randomElement()!
+    }
+    
+    private var shouldUpdateAdjective: Bool {
+        let calendar = Calendar.current
+        let lastUpdateComponents = calendar.dateComponents([.year, .month, .day], from: Date(timeIntervalSince1970: lastAdjectiveUpdate))
+        let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentTime)
+        
+        if lastUpdateComponents != currentComponents {
+            lastAdjectiveUpdate = currentTime.timeIntervalSince1970
+            todayAdj = randomAdjective
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    init() {
+        todayAdj = randomAdjective
+    }
     
     var body: some View {
         NavigationStack {
             VStack {
                 Text(countdownString())
-                    .font(.largeTitle)
+                    .font(.title2)
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                    .padding(.bottom)
+                
+//                if shouldUpdateAdjective {
+//                    Task {
+//                        print("changed today's adjective")
+//                    }
+//                }
+                
+                Text("Today's Theme: \(todayAdj)")
+                    .font(.title)
+                    .bold()
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                    .padding(.bottom)
                 
                 List {
                     ForEach(uploads) { upload in
