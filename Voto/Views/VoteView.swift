@@ -39,7 +39,7 @@ struct VoteView: View {
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Button ("Cancel") {
+                Button ("Back") {
                     dismiss()
                 }
             }

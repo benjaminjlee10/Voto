@@ -10,7 +10,7 @@ import UIKit
 import PhotosUI
 
 struct UploadView: View {
-    @EnvironmentObject var pictureVM: UploadViewModel
+    @EnvironmentObject var uploadVM: UploadViewModel
     @State var upload: Upload
     @State private var selectedImage: Image = Image(systemName: "rectangle.dashed")
     @State private var selectedPhoto: PhotosPickerItem?
@@ -80,7 +80,7 @@ struct UploadView: View {
         }
         .task {
             if let id = upload.id { // add to VStack - acts like .onAppear
-                if let url = await pictureVM.getImageURL(id: id) { // if this isn't a new place id
+                if let url = await uploadVM.getImageURL(id: id) { // if this isn't a new place id
                     imageURL = url
                 }
             }
@@ -99,10 +99,10 @@ struct UploadView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Upload") {
                     Task {
-                        let id = await pictureVM.saveUpload(upload: upload)
+                        let id = await uploadVM.saveUpload(upload: upload)
                         if id != nil { // save works
                             upload.id = id
-                            await pictureVM.saveImage(id: upload.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
+                            await uploadVM.saveImage(id: upload.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
                             dismiss()
                         }
                         else { // did not save
