@@ -14,27 +14,32 @@ struct MainView: View {
     @FirestoreQuery(collectionPath: "uploads") var uploads: [Upload]
     @State private var sheetIsPresented = false
     @Environment(\.dismiss) private var dismiss
+    @State private var currentTime = Date()
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(uploads) { upload in
-                    NavigationLink {
-                        VoteView(upload: upload, vote: Vote())
-                    } label: {
-                        Text(upload.name)
+            VStack {
+                Text("\(currentTime.hourAndMinute)")
+                
+                List {
+                    ForEach(uploads) { upload in
+                        NavigationLink {
+                            VoteView(upload: upload, vote: Vote())
+                        } label: {
+                            Text(upload.name)
+                        }
                     }
                 }
-            }
-            .listStyle(.plain)
-            .navigationTitle("Pictures of the Day")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        sheetIsPresented.toggle()
-                    } label: {
-                        Image(systemName: "plus")
+                .listStyle(.plain)
+                .navigationTitle("Posts of the Day")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            sheetIsPresented.toggle()
+                        } label: {
+                            Image(systemName: "plus")
+                        }
                     }
                 }
             }
@@ -51,5 +56,13 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
             .environmentObject(UploadViewModel())
+    }
+}
+
+private extension Date {
+    var hourAndMinute: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self)
     }
 }

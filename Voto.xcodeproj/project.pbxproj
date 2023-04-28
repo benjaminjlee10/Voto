@@ -108,8 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				D8DE555129F9CFD000BA5E71 /* Upload.swift */,
-				D820666D29FA0ED5006B01D2 /* Vote.swift */,
 				D820667729FA422C006B01D2 /* User.swift */,
+				D820666D29FA0ED5006B01D2 /* Vote.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -118,8 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				D8DE555329F9D09000BA5E71 /* UploadViewModel.swift */,
-				D820667329FA15CC006B01D2 /* UpvoteViewModel.swift */,
 				D820668729FA4CC4006B01D2 /* UserViewModel.swift */,
+				D820667329FA15CC006B01D2 /* UpvoteViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -131,9 +131,9 @@
 				D820668329FA4819006B01D2 /* BarView.swift */,
 				D8DE553529F9CD0400BA5E71 /* MainView.swift */,
 				D820666B29F9FD35006B01D2 /* UploadView.swift */,
+				D820668529FA491F006B01D2 /* ProfileView.swift */,
 				D820666F29FA0F6B006B01D2 /* VoteView.swift */,
 				D820667129FA12A6006B01D2 /* UpvoteView.swift */,
-				D820668529FA491F006B01D2 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
