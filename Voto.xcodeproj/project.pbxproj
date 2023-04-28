@@ -131,9 +131,9 @@
 				D820668329FA4819006B01D2 /* BarView.swift */,
 				D8DE553529F9CD0400BA5E71 /* MainView.swift */,
 				D820666B29F9FD35006B01D2 /* UploadView.swift */,
-				D820668529FA491F006B01D2 /* ProfileView.swift */,
 				D820666F29FA0F6B006B01D2 /* VoteView.swift */,
 				D820667129FA12A6006B01D2 /* UpvoteView.swift */,
+				D820668529FA491F006B01D2 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

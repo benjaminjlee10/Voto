@@ -61,7 +61,7 @@ struct MainView: View {
                 List {
                     ForEach(uploads) { upload in
                         NavigationLink {
-                            VoteView(upload: upload, vote: Vote())
+                            VoteView(upload: upload, vote: Vote(), dailyAdjective: todayAdj)
                         } label: {
                             Text(upload.name)
                         }
