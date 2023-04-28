@@ -50,12 +50,6 @@ struct MainView: View {
                     .minimumScaleFactor(0.5)
                     .padding(.bottom)
                 
-//                if shouldUpdateAdjective {
-//                    Task {
-//                        print("changed today's adjective")
-//                    }
-//                }
-                
                 Text("Today's Theme: \(todayAdj)")
                     .font(.title)
                     .bold()
@@ -97,7 +91,7 @@ struct MainView: View {
         }
         .sheet(isPresented: $sheetIsPresented) {
             NavigationStack {
-                UploadView(upload: Upload())
+                UploadView(upload: Upload(), dailyAdjective: todayAdj)
             }
         }
     }

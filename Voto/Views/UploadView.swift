@@ -17,10 +17,17 @@ struct UploadView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var imageURL: URL? // will hold URL of FirebaseStorage image
     var previewRunning = false
+    @State var dailyAdjective: String
     
     var body: some View {
         VStack (alignment: .leading) {
-            
+            Text("Today's Theme: \(dailyAdjective)")
+                .font(.title)
+                .foregroundColor(.orange)
+                .multilineTextAlignment(.center)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .padding(.vertical)
             
             HStack {
                 Text("Upload Image:")
@@ -87,6 +94,9 @@ struct UploadView: View {
                 }
             }
         }
+        .onAppear {
+            
+        }
         .font(.title2)
         .padding()
         .navigationBarBackButtonHidden()
@@ -120,7 +130,7 @@ struct UploadView: View {
 struct UploadView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            UploadView(upload: Upload(name: "test name", description: "just a test description"))
+            UploadView(upload: Upload(name: "test name", description: "just a test description"), dailyAdjective: "test daily adjective")
                 .environmentObject(UploadViewModel())
         }
     }
