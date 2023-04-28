@@ -64,9 +64,9 @@ struct UploadView: View {
             }
             Spacer()
             
-            Text("Location:")
+            Text("Name:")
                 .bold()
-            TextField("location", text: $upload.location)
+            TextField("name", text: $upload.name)
                 .textFieldStyle(.roundedBorder)
                 .padding(.bottom)
             
@@ -118,7 +118,7 @@ struct UploadView: View {
 struct UploadView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            UploadView(upload: Upload(location: "test location", description: "just a test description"))
+            UploadView(upload: Upload(name: "test name", description: "just a test description"))
                 .environmentObject(UploadViewModel())
         }
     }

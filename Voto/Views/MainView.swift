@@ -22,7 +22,7 @@ struct MainView: View {
                     NavigationLink {
                         VoteView(upload: upload, vote: Vote())
                     } label: {
-                        Text(upload.description)
+                        Text(upload.name)
                     }
                 }
             }

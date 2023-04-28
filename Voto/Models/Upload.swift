@@ -10,11 +10,11 @@ import FirebaseFirestoreSwift
 
 struct Upload: Codable, Identifiable {
     @DocumentID var id: String?
-    var location = ""
+    var name = ""
     var description = ""
     var imageID = ""
     
     var dictionary: [String: Any] {
-        return ["location": location, "description": description, "imageID": imageID]
+        return ["name": name, "description": description, "imageID": imageID]
     }
 }
