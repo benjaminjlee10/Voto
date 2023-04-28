@@ -13,7 +13,7 @@ import UIKit
 class UploadViewModel: ObservableObject {
     @Published var upload = Upload()
     
-    func savePicture(upload: Upload) async -> String? {
+    func saveUpload(upload: Upload) async -> String? {
         let db = Firestore.firestore()
         if let id = upload.id { // upload must already exist, so save
             do {

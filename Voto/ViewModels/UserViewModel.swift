@@ -18,7 +18,7 @@ class UserViewModel: ObservableObject {
         let db = Firestore.firestore()
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        db.collection("users").document(uid).getDocument { document, error in
+        db.collection("profiles").document(uid).getDocument { document, error in
             if let error = error {
                 print("Error getting user document: \(error)")
             } else {
@@ -37,7 +37,7 @@ class UserViewModel: ObservableObject {
         do {
             var userData = user.dictionary
             userData["name"] = user.name
-            let _ = try await db.collection("users").document(userID).setData(user.dictionary)
+            let _ = try await db.collection("profiles").document(userID).setData(user.dictionary)
             print("😎 Data added successfully!")
             return userID
         } catch {

@@ -99,7 +99,7 @@ struct UploadView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Upload") {
                     Task {
-                        let id = await pictureVM.savePicture(upload: upload)
+                        let id = await pictureVM.saveUpload(upload: upload)
                         if id != nil { // save works
                             upload.id = id
                             await pictureVM.saveImage(id: upload.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())

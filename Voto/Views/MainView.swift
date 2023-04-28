@@ -10,21 +10,19 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct MainView: View {
-    @EnvironmentObject var pictureVM: UploadViewModel
-    @FirestoreQuery(collectionPath: "pictures") var pictures: [Upload]
+    @EnvironmentObject var uploadVM: UploadViewModel
+    @FirestoreQuery(collectionPath: "uploads") var uploads: [Upload]
     @State private var sheetIsPresented = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(pictures) { picture in
+                ForEach(uploads) { upload in
                     NavigationLink {
-                        VoteView(upload: picture, vote: Vote())
+                        VoteView(upload: upload, vote: Vote())
                     } label: {
-                        HStack {
-                            Text("test")
-                        }
+                        Text(upload.description)
                     }
                 }
             }
