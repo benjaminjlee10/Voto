@@ -29,10 +29,10 @@ struct ProfileView: View {
                 } label: {
                     Text("Sign Out")
                         .foregroundColor(.red)
-                        .font(.title2)
+                        .font(.title3)
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                         .foregroundColor(.red)
-                        .font(.title)
+                        .font(.title3)
                 }
                 .padding()
             }
@@ -53,6 +53,7 @@ struct ProfileView: View {
                     .foregroundColor(.gray)
                 Spacer()
             }
+            
             .padding()
             
             Spacer()

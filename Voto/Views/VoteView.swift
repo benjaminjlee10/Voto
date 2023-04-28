@@ -81,7 +81,7 @@ struct VoteView: View {
 struct VoteView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            VoteView(upload: Upload(name: "BC TEST", description: "this is a test"), vote: Vote())
+            VoteView(upload: Upload(name: "Sample Name", description: "sample description"), vote: Vote())
         }
     }
 }

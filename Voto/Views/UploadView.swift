@@ -20,6 +20,8 @@ struct UploadView: View {
     
     var body: some View {
         VStack (alignment: .leading) {
+            
+            
             HStack {
                 Text("Upload Image:")
                     .bold()
