@@ -12,11 +12,9 @@ import FirebaseFirestoreSwift
 struct Vote: Identifiable, Codable {
     @DocumentID var id: String?
     var vote = 0
-    var comment = ""
-    var commenter = ""
     var postedOn = Date()
     
     var dictionary: [String: Any] {
-        return ["vote": vote, "comment": comment, "commenter": commenter, "postedOn": Timestamp(date: Date())]
+        return ["vote": vote, "postedOn": Timestamp(date: Date())]
     }
 }

@@ -50,7 +50,7 @@ struct UploadView: View {
                         .resizable()
                         .scaledToFit()
                 } placeholder: {
-                    Image(systemName: "capsule")
+                    Image(systemName: "rectangle-dashed")
                         .resizable()
                         .scaledToFit()
                 }
