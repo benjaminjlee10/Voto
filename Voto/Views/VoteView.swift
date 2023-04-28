@@ -33,7 +33,7 @@ struct VoteView: View {
                     .multilineTextAlignment(.leading)
                     .lineLimit(1)
                 
-                Text(upload.description)
+                Text(upload.poster)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
@@ -56,6 +56,9 @@ struct VoteView: View {
                     .scaledToFit()
                     .frame(maxWidth: .infinity)
             }
+            Spacer()
+            
+            Text(upload.description)
             
             Spacer()
             
@@ -90,7 +93,7 @@ struct VoteView: View {
 struct VoteView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            VoteView(upload: Upload(name: "Sample Name", description: "sample description"), vote: Vote(), dailyAdjective: "test daily adjective")
+            VoteView(upload: Upload(name: "Sample Name", description: "sample description", poster: "sample@bc.edu"), vote: Vote(), dailyAdjective: "test daily adjective")
         }
     }
 }

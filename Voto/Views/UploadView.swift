@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import PhotosUI
+import FirebaseAuth
 
 struct UploadView: View {
     @EnvironmentObject var uploadVM: UploadViewModel
@@ -110,6 +111,7 @@ struct UploadView: View {
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Upload") {
+                    upload.poster = (Auth.auth().currentUser?.email)!
                     Task {
                         let id = await uploadVM.saveUpload(upload: upload)
                         if id != nil { // save works
