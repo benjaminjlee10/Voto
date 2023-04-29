@@ -13,7 +13,6 @@ struct UpvoteView: View {
     
     var body: some View {
         VStack {
-//            Text("Upvotes: \(upvoteVM.upvotes)")
             Button {
                 upvoteVM.didToggleUpvote()
                 upload.upvotes += 1

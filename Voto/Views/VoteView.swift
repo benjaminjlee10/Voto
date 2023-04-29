@@ -12,9 +12,9 @@ struct VoteView: View {
     @EnvironmentObject var upvoteVM: UpvoteViewModel
     @State var upload: Upload
     @State var vote: Vote
-    @Environment(\.dismiss) private var dismiss
     @State private var imageURL: URL? // will hold URL of FirebaseStorage image
     @State private var selectedImage: Image = Image(systemName: "rectangle.dashed")
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {

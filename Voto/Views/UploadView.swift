@@ -12,13 +12,13 @@ import FirebaseAuth
 
 struct UploadView: View {
     @EnvironmentObject var uploadVM: UploadViewModel
-    @State var upload: Upload
     @State private var selectedImage: Image = Image(systemName: "rectangle.dashed")
     @State private var selectedPhoto: PhotosPickerItem?
-    @Environment(\.dismiss) private var dismiss
     @State private var imageURL: URL? // will hold URL of FirebaseStorage image
     var previewRunning = false
+    @State var upload: Upload
     @State var dailyAdjective: String
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack (alignment: .leading) {

@@ -10,12 +10,17 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct MainView: View {
+    enum SortOption: String, CaseIterable {
+        case recent = "Recently Posted"
+        case upvotes = "Number of Upvotes"
+    }
+    
     @EnvironmentObject var uploadVM: UploadViewModel
     @FirestoreQuery(collectionPath: "uploads") var uploads: [Upload]
     @State private var sheetIsPresented = false
-    @Environment(\.dismiss) private var dismiss
     @State private var currentTime = Date()
     @State private var selectedSortOption: SortOption = .recent
+    @Environment(\.dismiss) private var dismiss
     @State var user: User
     
     @AppStorage("adjective") private var todayAdj = ""
@@ -39,11 +44,6 @@ struct MainView: View {
         else {
             return false
         }
-    }
-    
-    enum SortOption: String, CaseIterable {
-        case recent = "Recently Posted"
-        case upvotes = "Number of Upvotes"
     }
     
     var body: some View {

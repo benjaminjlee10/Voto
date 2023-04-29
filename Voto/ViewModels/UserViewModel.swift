@@ -45,14 +45,4 @@ class UserViewModel: ObservableObject {
             return nil
         }
     }
-    
-    func getUploadsForUser(userID: String) async -> [Upload] {
-        let uploadsRef = Firestore.firestore().collection("uploads")
-        let query = uploadsRef.whereField("posterID", isEqualTo: userID)
-        let snapshot = try! await query.getDocuments()
-        let uploads = snapshot.documents.compactMap { document in
-            try? document.data(as: Upload.self)
-        }
-        return uploads
-    }
 }

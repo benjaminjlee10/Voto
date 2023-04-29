@@ -13,8 +13,8 @@ import FirebaseFirestoreSwift
 struct ProfileView: View {
     @EnvironmentObject var userVM: UserViewModel
     @State var user: User
-    @Environment(\.dismiss) private var dismiss
     @FirestoreQuery(collectionPath: "uploads") var uploads: [Upload]
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationView {
