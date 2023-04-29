@@ -28,16 +28,29 @@ struct ProfilePostsView: View {
                     .minimumScaleFactor(0.5)
                 }
             }
-            
+            .listStyle(.plain)
         }
         .font(.title2)
         .padding()
+        .background(
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [Color.yellow.opacity(0.2), Color.yellow.opacity(0.1)]
+                ),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
+        )
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Back") {
+                Button {
                     dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                    Text("Back")
                 }
             }
         }

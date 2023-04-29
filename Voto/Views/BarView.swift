@@ -8,20 +8,33 @@
 import SwiftUI
 
 struct BarView: View {
+    @State private var selectedIndex = 0
+    
     var body: some View {
-        TabView {
-            MainView(user: User())
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("Home")
-                }
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+            TabView(selection: $selectedIndex) {
+                MainView(user: User())
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("Home")
+                    }
+                    .tag(0)
+                
+                ProfileView(user: User())
+                    .tabItem {
+                        Image(systemName: "person.crop.circle")
+                        Text("Profile")
+                    }
+                    .tag(1)
+            }
+            .accentColor(.orange)
             
-            ProfileView(user: User())
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("Profile")
-                }
+            Rectangle()
+                .fill(Color.gray)
+                .frame(height: 1)
+                .padding(.bottom, 55)
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 

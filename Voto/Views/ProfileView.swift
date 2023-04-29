@@ -33,42 +33,69 @@ struct ProfileView: View {
                     } label: {
                         Text("Sign Out")
                             .foregroundColor(.red)
-                            .font(.title3)
+                            .font(.title2)
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                             .foregroundColor(.red)
-                            .font(.title3)
+                            .font(.title2)
                     }
                     .padding()
                 }
                 Image(systemName: "person.circle")
                     .resizable()
                     .frame(width: 100, height: 100)
+                    .foregroundColor(.yellow)
                     .padding()
                 
                 TextField("Name", text: $user.name)
+                    .font(.title2)
                     .textFieldStyle(.roundedBorder)
                     .autocorrectionDisabled()
                     .submitLabel(.done)
                     .padding()
                 
+                ZStack {
+                    Rectangle()
+                        .fill(Color.yellow)
+                        .frame(width: 365, height: 40)
+                        .cornerRadius(20)
+                    
+                    HStack {
+                        Text("Email:")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(.white)
+                        Text(Auth.auth().currentUser?.email ?? "")
+                            .foregroundColor(.white)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                }
+                .padding(.horizontal, 35)
+                
                 HStack {
-                    Text("Email:")
+                    NavigationLink {
+                        ProfilePostsView(uploads: getUserUploads())
+                    } label: {
+                        HStack {
+                            Text("My Uploads")
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                        }
+                        .font(.title3)
                         .bold()
-                    Text(Auth.auth().currentUser?.email ?? "")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.black)
+                        .padding()
+                        .background(Color.yellow)
+                        .clipShape(Rectangle())
+                        .cornerRadius(40)
+                    }
+                    .shadow(color: .gray, radius: 2)
+                    
                     Spacer()
                 }
                 .padding()
-                
-                NavigationLink {
-                    ProfilePostsView(uploads: getUserUploads())
-                } label: {
-                    Text("My Uploads")
-                }
-                .font(.title2)
-                .bold()
-                .foregroundColor(.orange)
-                .cornerRadius(40)
                 
                 Spacer()
                 
@@ -93,8 +120,8 @@ struct ProfileView: View {
                     Text("Save")
                         .fontWeight(.semibold)
                         .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
+                        .foregroundColor(.black)
+                        .background(Color.yellow)
                         .cornerRadius(40)
                 }
                 .padding()
@@ -102,7 +129,17 @@ struct ProfileView: View {
             .onAppear {
                 userVM.loadUser()
                 user = userVM.user
-        }
+            }
+            .background(
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [Color.yellow.opacity(0.2), Color.yellow.opacity(0.1)]
+                    ),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .edgesIgnoringSafeArea(.all)
+            )
         }
     }
     

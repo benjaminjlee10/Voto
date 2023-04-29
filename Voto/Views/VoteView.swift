@@ -87,11 +87,25 @@ struct VoteView: View {
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Button ("Back") {
+                Button {
                     dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                    Text("Back")
                 }
             }
         }
+        .accentColor(.orange)
+        .background(
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [Color.yellow.opacity(0.2), Color.yellow.opacity(0.1)]
+                ),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
+        )
     }
     
     func upvoteButtonTapped(upload: Upload) {

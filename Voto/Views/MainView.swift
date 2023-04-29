@@ -43,16 +43,24 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text(countdownString())
-                    .font(.title2)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                    .padding(.bottom)
+                ZStack {
+                    Rectangle()
+                        .fill(Color.yellow)
+                        .frame(width: 300, height: 40)
+                        .cornerRadius(20)
+                    Text(countdownString())
+                        .font(.title2)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .padding(.horizontal)
+                }
                 
                 Text("Today's Theme: \(todayAdj)")
-                    .font(.title)
+                    .font(.title2)
                     .bold()
+                    .foregroundColor(.orange)
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
@@ -65,6 +73,10 @@ struct MainView: View {
                         } label: {
                             Text(upload.name)
                         }
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     }
                 }
                 .listStyle(.plain)
@@ -80,7 +92,28 @@ struct MainView: View {
                     }
                 }
             }
+            .background(
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [Color.yellow.opacity(0.2), Color.yellow.opacity(0.1)]
+                    ),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .edgesIgnoringSafeArea(.all)
+            )
         }
+        .background(
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [Color.yellow.opacity(0.2), Color.yellow.opacity(0.1)]
+                ),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
+        )
+        .accentColor(.orange)
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 updateTime()
