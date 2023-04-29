@@ -14,9 +14,10 @@ struct Upload: Codable, Identifiable {
     var description = ""
     var poster = ""
     var upvotes = 0
+    var adjective = ""
     var imageID = ""
     
     var dictionary: [String: Any] {
-        return ["name": name, "description": description, "poster": poster, "upvotes": upvotes, "imageID": imageID]
+        return ["name": name, "description": description, "poster": poster, "upvotes": upvotes, "adjective": adjective, "imageID": imageID]
     }
 }

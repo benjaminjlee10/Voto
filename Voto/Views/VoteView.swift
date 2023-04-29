@@ -15,11 +15,10 @@ struct VoteView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var imageURL: URL? // will hold URL of FirebaseStorage image
     @State private var selectedImage: Image = Image(systemName: "rectangle.dashed")
-    @State var dailyAdjective: String
     
     var body: some View {
         VStack {
-            Text("Today's Theme: \(dailyAdjective)")
+            Text("This day's Theme: \(upload.adjective)")
                 .font(.title)
                 .foregroundColor(.orange)
                 .multilineTextAlignment(.center)
@@ -105,7 +104,7 @@ struct VoteView: View {
 struct VoteView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            VoteView(upload: Upload(name: "Sample Name", description: "sample description", poster: "sample@bc.edu"), vote: Vote(), dailyAdjective: "test daily adjective")
+            VoteView(upload: Upload(name: "Sample Name", description: "sample description", poster: "sample@bc.edu"), vote: Vote())
                 .environmentObject(UploadViewModel())
         }
     }

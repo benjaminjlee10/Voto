@@ -112,6 +112,8 @@ struct UploadView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Upload") {
                     upload.poster = (Auth.auth().currentUser?.email)!
+                    upload.adjective = dailyAdjective
+                    
                     Task {
                         let id = await uploadVM.saveUpload(upload: upload)
                         if id != nil { // save works
