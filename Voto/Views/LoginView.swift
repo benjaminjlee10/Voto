@@ -31,7 +31,7 @@ struct LoginView: View {
             .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Image(systemName: "camera.shutter.button")
+                Image("logo")
                     .resizable()
                     .scaledToFit()
                     .padding()
