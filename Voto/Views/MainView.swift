@@ -15,6 +15,7 @@ struct MainView: View {
     @State private var sheetIsPresented = false
     @Environment(\.dismiss) private var dismiss
     @State private var currentTime = Date()
+    @State private var selectedSortOption: SortOption = .recent
     @State var user: User
     
     @AppStorage("adjective") private var todayAdj = ""
@@ -38,6 +39,11 @@ struct MainView: View {
         else {
             return false
         }
+    }
+    
+    enum SortOption: String, CaseIterable {
+        case recent = "Recently Posted"
+        case upvotes = "Number of Upvotes"
     }
     
     var body: some View {
@@ -66,8 +72,14 @@ struct MainView: View {
                     .minimumScaleFactor(0.5)
                     .padding(.bottom)
                 
+                Picker("Sort by:", selection: $selectedSortOption) {
+                    ForEach(SortOption.allCases, id: \.self) { SortOption in
+                        Text(SortOption.rawValue).tag(SortOption)
+                    }
+                }
+                
                 List {
-                    ForEach(uploads) { upload in
+                    ForEach(uploads.sorted(by: sortPosts), id: \.id) { upload in
                         NavigationLink {
                             VoteView(upload: upload, vote: Vote())
                         } label: {
@@ -149,6 +161,15 @@ struct MainView: View {
         let minutes = Int(interval) / 60 % 60
         let seconds = Int(interval) % 60
         return String(format: "Time Remaining: %02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    private func sortPosts(_ upload1: Upload, _ upload2: Upload) -> Bool {
+        switch selectedSortOption {
+        case .recent:
+            return upload1.postedDate > upload2.postedDate
+        case .upvotes:
+            return upload1.upvotes > upload2.upvotes
+        }
     }
 }
 
