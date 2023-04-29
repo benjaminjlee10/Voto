@@ -38,12 +38,12 @@ class UploadViewModel: ObservableObject {
     
     func deleteData(picture: Upload) async {
         let db = Firestore.firestore()
-
+        
         guard let id = picture.id else {
             print("😡 ERROR: id was nil. This should not have happened")
             return
         }
-
+        
         do {
             try await db.collection("pictures").document(id).delete()
             print("🗑️Document successfully removed")
@@ -81,17 +81,6 @@ class UploadViewModel: ObservableObject {
             return url
         } catch {
             return nil
-        }
-    }
-    
-    func updateUpload(upload: Upload) {
-        let db = Firestore.firestore()
-        
-        do {
-            try db.collection("uploads").document(upload.id!).setData(from: upload)
-            print("Upload has been updated!")
-        } catch {
-            print(error.localizedDescription)
         }
     }
 }

@@ -70,11 +70,9 @@ struct VoteView: View {
             Text("Upvotes: \(upload.upvotes)")
             
             Button {
-                upvoteVM.didToggleUpvote()
-                upload.upvotes = upvoteVM.upvotes
-                uploadVM.updateUpload(upload: upload)
+                upvoteButtonTapped(upload: upload)
             } label: {
-                Text("Upvote")
+                Image(systemName: "hand.thumbsup")
             }
             
             Spacer()
@@ -96,6 +94,12 @@ struct VoteView: View {
             }
         }
     }
+    
+    func upvoteButtonTapped(upload: Upload) {
+        upvoteVM.upvoteButtonAction(upload: upload)
+        self.upload.upvotes += 1
+    }
+    
 }
 
 struct VoteView_Previews: PreviewProvider {
