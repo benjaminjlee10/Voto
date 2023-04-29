@@ -60,8 +60,6 @@ struct ProfileView: View {
                 }
                 .padding()
                 
-                Spacer()
-                
                 NavigationLink {
                     ProfilePostsView(uploads: getUserUploads())
                 } label: {

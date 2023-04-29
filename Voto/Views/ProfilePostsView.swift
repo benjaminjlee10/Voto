@@ -14,22 +14,26 @@ struct ProfilePostsView: View {
     var body: some View {
         VStack {
             List(uploads) { upload in
-                ForEach(uploads) { upload in
-                    NavigationLink {
-                        VoteView(upload: upload, vote: Vote())
-                    } label: {
-                        HStack {
-                            Text(upload.name)
-                            
-                            Spacer()
-                            
-                            Text("Theme: \(upload.adjective)")
-                        }
+                NavigationLink {
+                    VoteView(upload: upload, vote: Vote())
+                } label: {
+                    HStack {
+                        Text(upload.name)
+                        
+                        Spacer()
+                        
+                        Text("(\(upload.adjective))")
                     }
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 }
             }
             
         }
+        .font(.title2)
+        .padding()
+        .navigationBarBackButtonHidden()
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("Back") {
